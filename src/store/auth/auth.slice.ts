@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { RootState } from 'store';
 import { api, RegisterData } from './auth.api';
 
 interface UserData {
-  type: 'user' | 'agent' | null;
+  role: 'user' | 'agent' | null;
   id: number | null;
   name: string | null;
   email: string | null;
@@ -16,7 +17,7 @@ interface AuthState {
 
 const initialState: AuthState = {
   userData: {
-    type: null,
+    role: null,
     id: null,
     name: null,
     email: null,
@@ -55,12 +56,11 @@ export const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      console.log('action.payload', action.payload);
       const user = action.payload.user;
       state.loading = false;
       state.userData = {
         ...state.userData,
-        type: user.type,
+        role: user.role,
         id: user.id,
         name: user.name,
         email: user.email,
@@ -68,24 +68,26 @@ export const authSlice = createSlice({
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? 'Something went wrong';
+      state.error = action.error.message ?? 'Login failed';
     });
     builder.addCase(signUp.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
+      const user = action.payload.user;
+
       state.loading = false;
       state.userData = {
         ...state.userData,
-        type: 'user',
-        id: action.payload.id,
-        name: action.payload.name,
-        email: action.payload.email,
+        role: user.role,
+        id: user.id,
+        name: user.name,
+        email: user.email,
       };
     });
     builder.addCase(signUp.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? 'Something went wrong';
+      state.error = action.error.message ?? 'Sign up failed';
     });
     builder.addCase(logout.pending, (state) => {
       state.loading = true;
@@ -93,7 +95,7 @@ export const authSlice = createSlice({
     builder.addCase(logout.fulfilled, (state) => {
       state.loading = false;
       state.userData = {
-        type: null,
+        role: null,
         id: null,
         name: null,
         email: null,
@@ -101,9 +103,11 @@ export const authSlice = createSlice({
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message ?? 'Something went wrong';
+      state.error = action.error.message ?? 'Logout failed';
     });
   },
 });
+
+export const selectAuth = (state: RootState) => state.authReducer.userData;
 
 export default authSlice.reducer;

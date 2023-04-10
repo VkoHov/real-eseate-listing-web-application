@@ -6,6 +6,118 @@
       "type": "user",
       "name": "Valodik",
       "id": 1
+    },
+    {
+      "email": "vko@gmail.com",
+      "password": "$2a$10$TMYcTMS4kVsb5PU29haaluRl1m/1LlBagL3s1cmu9/L2S5iQbTB4.",
+      "id": 2
+    },
+    {
+      "email": "vkdo@gmail.com",
+      "password": "$2a$10$HITRJwVCSVPgpVIHBGstuuQsDzaxZCv.vevlygavU86AXEpLQTv86",
+      "role": "user",
+      "name": "asfas",
+      "id": 3
+    },
+    {
+      "email": "vksso@gmail.com",
+      "password": "$2a$10$ypadOaxSWEUJ0RdK8dMoU.ow8gNJqye13VW6jn4OfIWr2Lpmb3WD.",
+      "role": "agent",
+      "name": "asfas",
+      "id": 4
+    },
+    {
+      "email": "ruben@gmail.com",
+      "password": "$2a$10$6TWH7FuaxabDUcu1fLJI4eAJdMCIqS5JuOOk0hA4kIjQglErERmyG",
+      "role": "agent",
+      "name": "Ruben",
+      "id": 5
+    },
+    {
+      "email": "rrrr@gmail.com",
+      "password": "$2a$10$k.mdkBuki7jgz5mkKnAmm.2YFfCtMDWeU5LwEIVpwzHczq5Fx49lO",
+      "role": "agent",
+      "name": "Ruben",
+      "id": 6
+    }
+  ],
+  "posts": [
+    {
+      "id": 3,
+      "title": "Luxurious Mansion",
+      "description": "Elegant mansion with stunning views of the ocean",
+      "images": [
+        "https://example.com/mansion1.jpg",
+        "https://example.com/mansion2.jpg"
+      ],
+      "price": 2000000,
+      "type": "Mansion",
+      "location": "Miami, FL",
+      "user_id": 5
+    },
+    {
+      "id": 4,
+      "title": "Modern City Loft",
+      "description": "Contemporary loft with sleek design and urban vibes",
+      "images": [
+        "https://example.com/loft1.jpg",
+        "https://example.com/loft2.jpg"
+      ],
+      "price": 800000,
+      "type": "Loft",
+      "location": "New York, NY"
+    },
+    {
+      "title": "Vardges",
+      "id": 5
+    },
+    {
+      "id": 6,
+      "title": "Beachfront Bungalow",
+      "description": "Relaxing beachfront bungalow with stunning ocean views",
+      "images": [
+        "https://example.com/bungalow1.jpg",
+        "https://example.com/bungalow2.jpg"
+      ],
+      "price": 750000,
+      "type": "Bungalow",
+      "location": "Hawaii, HI"
+    },
+    {
+      "id": 7,
+      "title": "Rustic Log Cabin",
+      "description": "Cozy log cabin with wood-burning fireplace and mountain views",
+      "images": [
+        "https://example.com/cabin1.jpg",
+        "https://example.com/cabin2.jpg"
+      ],
+      "price": 300000,
+      "type": "Log Cabin",
+      "location": "Aspen, CO"
+    },
+    {
+      "id": 8,
+      "title": "Contemporary Townhouse",
+      "description": "Sleek and modern townhouse in a trendy urban neighborhood",
+      "images": [
+        "https://example.com/townhouse1.jpg",
+        "https://example.com/townhouse2.jpg"
+      ],
+      "price": 600000,
+      "type": "Townhouse",
+      "location": "San Francisco, CA"
+    },
+    {
+      "id": 9,
+      "title": "Country Farmhouse",
+      "description": "Charming farmhouse with wrap-around porch and scenic countryside views",
+      "images": [
+        "https://example.com/farmhouse1.jpg",
+        "https://example.com/farmhouse2.jpg"
+      ],
+      "price": 400000,
+      "type": "Farmhouse",
+      "location": "Nashville, TN"
     }
   ]
 }

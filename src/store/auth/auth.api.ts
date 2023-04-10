@@ -8,12 +8,12 @@ type LoginData = {
 export type RegisterData = {
   email: string;
   password: string;
-  type: 'user' | 'agent';
+  role: 'user' | 'agent';
   name: string;
 };
 
 export type UserData = {
-  type: 'user' | 'agent' | null;
+  role: 'user' | 'agent' | null;
   id: number | null;
   name: string | null;
   email: string | null;
@@ -39,33 +39,29 @@ export const api = {
         },
       },
     );
-    localStorage.setItem('auth', response.data);
+    localStorage.setItem('auth', JSON.stringify(response.data.user));
     return response;
   },
 
   register: async ({
     email,
     password,
-    type,
+    role,
     name,
-  }: RegisterData): Promise<AxiosResponse<UserData>> => {
-    const response = await axios.post('/auth/register', {
+  }: RegisterData): Promise<
+    AxiosResponse<{ user: UserData; accessToke: string }>
+  > => {
+    const response = await axios.post('/register', {
       email,
       password,
-      type,
+      role,
       name,
     });
-    localStorage.setItem('token', response.data.accessToken);
+    localStorage.setItem('auth', JSON.stringify(response.data.user));
     return response;
   },
 
   logout: async (): Promise<void> => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      localStorage.removeItem('token');
-      await axios.post('/auth/logout', null, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-    }
+    localStorage.removeItem('auth');
   },
 };

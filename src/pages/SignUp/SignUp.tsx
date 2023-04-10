@@ -1,50 +1,141 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { signUp } from 'store/auth';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, Row, Col, Typography, Select } from 'antd';
+import { AppDispatch } from 'store';
+import { signUp, selectAuth } from 'store/auth';
 
-type SignUpFormData = {
-  email: string;
-  password: string;
-};
+const { Title, Link } = Typography;
+const { Option } = Select;
 
 const SignUp = () => {
-  const dispatch = useDispatch();
-  const [formData, setFormData] = useState<SignUpFormData>({
-    email: '',
-    password: '',
-  });
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const user = useSelector(selectAuth);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [role, setRole] = useState<'user' | 'agent'>('user');
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    if (user.name) {
+      navigate('/');
+    }
+  }, []);
+
+  const handleNavigateToLogin = () => {
+    navigate('/login');
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(signUp({ ...formData, type: 'user', name: 'gago' }));
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleRoleChange = (value: 'user' | 'agent') => {
+    setRole(value);
+  };
+
+  const handleSubmit = () => {
+    dispatch(signUp({ name, email, password, role })).then(() => {
+      navigate('/');
+    });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          type='email'
-          name='email'
-          id='email'
-          onChange={handleInputChange}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          name='password'
-          id='password'
-          onChange={handleInputChange}
-        />
-      </div>
-      <button type='submit'>Sign Up</button>
-    </form>
+    <Row justify='center' align='middle' style={{ minHeight: '100vh' }}>
+      <Col xs={22} sm={16} md={12} lg={8}>
+        <Title level={2} style={{ textAlign: 'center' }}>
+          Register
+        </Title>
+        <Form name='registrationForm' size='large' onFinish={handleSubmit}>
+          <Form.Item
+            label='Name'
+            name='name'
+            rules={[{ required: true, message: 'Please input your name!' }]}
+          >
+            <Input value={name} onChange={handleNameChange} />
+          </Form.Item>
+          <Form.Item
+            label='Email'
+            name='email'
+            rules={[
+              { required: true, message: 'Please input your email!' },
+              { type: 'email', message: 'Please input a valid email!' },
+            ]}
+          >
+            <Input value={email} onChange={handleEmailChange} />
+          </Form.Item>
+
+          <Form.Item
+            label='Password'
+            name='password'
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
+            <Input.Password value={password} onChange={handlePasswordChange} />
+          </Form.Item>
+
+          <Form.Item
+            label='Confirm Password'
+            name='confirmPassword'
+            dependencies={['password']}
+            rules={[
+              { required: true, message: 'Please confirm your password!' },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error('The two passwords do not match!'),
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
+          </Form.Item>
+
+          <Form.Item
+            label='Select'
+            name='userType'
+            rules={[{ required: true, message: 'Please select a user type!' }]}
+          >
+            <Select onChange={handleRoleChange} value={role}>
+              <Option value='user'>User</Option>
+              <Option value='agent'>Agent</Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item>
+            <Button type='primary' htmlType='submit' block>
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
+        <Typography style={{ textAlign: 'center' }}>
+          Already have an account?{' '}
+          <Link onClick={handleNavigateToLogin}>Login now!</Link>
+        </Typography>
+      </Col>
+    </Row>
   );
 };
 
