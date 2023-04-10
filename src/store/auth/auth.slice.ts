@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { api } from './auth.api';
+import { api, RegisterData } from './auth.api';
 
 interface UserData {
   type: 'user' | 'agent' | null;
   id: number | null;
   name: string | null;
-  token: string | null;
   email: string | null;
 }
 
@@ -20,7 +19,6 @@ const initialState: AuthState = {
     type: null,
     id: null,
     name: null,
-    token: null,
     email: null,
   },
   loading: false,
@@ -37,7 +35,7 @@ export const login = createAsyncThunk(
 
 export const signUp = createAsyncThunk(
   'auth/register',
-  async (userData: { email: string; password: string; name: string }) => {
+  async (userData: RegisterData) => {
     const response = await api.register(userData);
     return response.data;
   },
@@ -57,14 +55,15 @@ export const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
+      console.log('action.payload', action.payload);
+      const user = action.payload.user;
       state.loading = false;
       state.userData = {
         ...state.userData,
-        type: 'user',
-        id: action.payload.id,
-        name: action.payload.name,
-        token: action.payload.token,
-        email: action.payload.email,
+        type: user.type,
+        id: user.id,
+        name: user.name,
+        email: user.email,
       };
     });
     builder.addCase(login.rejected, (state, action) => {
@@ -81,7 +80,6 @@ export const authSlice = createSlice({
         type: 'user',
         id: action.payload.id,
         name: action.payload.name,
-        token: action.payload.token,
         email: action.payload.email,
       };
     });
@@ -98,7 +96,6 @@ export const authSlice = createSlice({
         type: null,
         id: null,
         name: null,
-        token: null,
         email: null,
       };
     });

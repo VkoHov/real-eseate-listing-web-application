@@ -5,9 +5,10 @@ type LoginData = {
   password: string;
 };
 
-type RegisterData = {
+export type RegisterData = {
   email: string;
   password: string;
+  type: 'user' | 'agent';
   name: string;
 };
 
@@ -15,7 +16,6 @@ export type UserData = {
   type: 'user' | 'agent' | null;
   id: number | null;
   name: string | null;
-  token: string | null;
   email: string | null;
 };
 
@@ -24,7 +24,9 @@ export const api = {
   login: async ({
     email,
     password,
-  }: LoginData): Promise<AxiosResponse<UserData>> => {
+  }: LoginData): Promise<
+    AxiosResponse<{ user: UserData; accessToke: string }>
+  > => {
     const response = await axios.post(
       '/login',
       {
@@ -37,7 +39,6 @@ export const api = {
         },
       },
     );
-    console.log(response.data);
     localStorage.setItem('auth', response.data);
     return response;
   },
@@ -45,11 +46,13 @@ export const api = {
   register: async ({
     email,
     password,
+    type,
     name,
   }: RegisterData): Promise<AxiosResponse<UserData>> => {
     const response = await axios.post('/auth/register', {
       email,
       password,
+      type,
       name,
     });
     localStorage.setItem('token', response.data.accessToken);

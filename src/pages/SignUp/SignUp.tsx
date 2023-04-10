@@ -20,8 +20,7 @@ const SignUp = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //@ts-ignore
-    dispatch(signUp(formData));
+    dispatch(signUp({ ...formData, type: 'user', name: 'gago' }));
   };
 
   return (
