@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'config/axios';
 
 type LoginData = {
   email: string;
@@ -19,44 +19,50 @@ export type UserData = {
   email: string | null;
 };
 
-export const loginAPI = async ({
-  email,
-  password,
-}: LoginData): Promise<UserData> => {
-  try {
-    const response: AxiosResponse<UserData> = await axios.post('/login', {
-      email,
-      password,
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+// Define the API methods
+export const api = {
+  login: async ({
+    email,
+    password,
+  }: LoginData): Promise<AxiosResponse<UserData>> => {
+    const response = await axios.post(
+      '/login',
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    console.log(response.data);
+    localStorage.setItem('auth', response.data);
+    return response;
+  },
 
-export const registerAPI = async ({
-  email,
-  password,
-  name,
-}: RegisterData): Promise<UserData> => {
-  try {
-    const response: AxiosResponse<UserData> = await axios.post('/register', {
+  register: async ({
+    email,
+    password,
+    name,
+  }: RegisterData): Promise<AxiosResponse<UserData>> => {
+    const response = await axios.post('/auth/register', {
       email,
       password,
       name,
     });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+    localStorage.setItem('token', response.data.accessToken);
+    return response;
+  },
 
-export const logoutAPI = async (token: string): Promise<void> => {
-  try {
-    await axios.post('/logout', null, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-  } catch (error) {
-    throw error;
-  }
+  logout: async (): Promise<void> => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      localStorage.removeItem('token');
+      await axios.post('/auth/logout', null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    }
+  },
 };
