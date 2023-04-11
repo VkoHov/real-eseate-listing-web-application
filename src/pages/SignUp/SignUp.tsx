@@ -118,7 +118,11 @@ const SignUp = () => {
             name='userType'
             rules={[{ required: true, message: 'Please select a user type!' }]}
           >
-            <Select onChange={handleRoleChange} value={role}>
+            <Select
+              onChange={handleRoleChange}
+              value={role}
+              defaultValue={role}
+            >
               <Option value='user'>User</Option>
               <Option value='agent'>Agent</Option>
             </Select>
