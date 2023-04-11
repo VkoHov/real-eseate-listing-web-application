@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { isNil } from 'lodash-es';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 import Listing from 'components/Listing';
-import CreatePostModal from 'components/CreatePostModal';
-import { selectAuth } from 'store/auth';
-import { Typography } from 'antd';
+import CreatePostModal from 'components/PostModal';
+import { selectAuth, UserRole } from 'store/auth';
 
 import './AdminListingPage.scss';
 
@@ -14,10 +14,16 @@ const { Title } = Typography;
 
 const AdminListingPage = () => {
   const user = useSelector(selectAuth);
+  const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  useEffect(() => {
+    if (user.role !== UserRole.AGENT) {
+      navigate('/');
+    }
+  }, [user]);
+
   const handleModalVisible = () => {
-    console.log('handleModalVisible: ', isModalVisible);
     setIsModalVisible(!isModalVisible);
   };
 

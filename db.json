@@ -1,115 +1,19 @@
 {
   "users": [
     {
-      "email": "john@example.com",
-      "password": "$2a$10$ZeIVpsR9AiOjnbzCcSOqt.JRG3yhhsWLYyQaqZ.W2JZ9XeKpMKR0m",
-      "type": "user",
-      "name": "Valodik",
+      "email": "dav@gmail.com",
+      "password": "$2a$10$8Qx3LZhvSIKZ89A8xjdSluStb54SOf7wryRbVnNFJkvov/1l9j3wa",
+      "role": "agent",
+      "name": "David",
       "id": 1
     },
     {
       "email": "vko@gmail.com",
-      "password": "$2a$10$TMYcTMS4kVsb5PU29haaluRl1m/1LlBagL3s1cmu9/L2S5iQbTB4.",
-      "id": 2
-    },
-    {
-      "email": "vkdo@gmail.com",
-      "password": "$2a$10$HITRJwVCSVPgpVIHBGstuuQsDzaxZCv.vevlygavU86AXEpLQTv86",
+      "password": "$2a$10$sgMDDmuZf0IKHR6Z5Bm2E.ixOpxLlKr4Eqh0MOmG1B7h0JP6BuYOK",
       "role": "user",
       "name": "asfas",
-      "id": 3
-    },
-    {
-      "email": "vksso@gmail.com",
-      "password": "$2a$10$ypadOaxSWEUJ0RdK8dMoU.ow8gNJqye13VW6jn4OfIWr2Lpmb3WD.",
-      "role": "agent",
-      "name": "asfas",
-      "id": 4
-    },
-    {
-      "email": "ruben@gmail.com",
-      "password": "$2a$10$6TWH7FuaxabDUcu1fLJI4eAJdMCIqS5JuOOk0hA4kIjQglErERmyG",
-      "role": "agent",
-      "name": "Ruben",
-      "id": 5
-    },
-    {
-      "email": "rrrr@gmail.com",
-      "password": "$2a$10$k.mdkBuki7jgz5mkKnAmm.2YFfCtMDWeU5LwEIVpwzHczq5Fx49lO",
-      "role": "agent",
-      "name": "Ruben",
-      "id": 6
-    },
-    {
-      "email": "vkohovhannisyan96@gmail.com",
-      "password": "$2a$10$EtSK9qdDFF2FxkdyKjJvxegJ8Sa/fZn3rZc1R4a/n7OscYZgQoDOK",
-      "role": "agent",
-      "name": "Vardges",
-      "id": 7
+      "id": 2
     }
   ],
-  "posts": [
-    {
-      "id": 3,
-      "title": "Luxurious Mansion",
-      "description": "Elegant mansion with stunning views of the ocean",
-      "images": [
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
-      ],
-      "price": 2000000,
-      "type": "Mansion",
-      "location": "Miami, FL",
-      "user_id": 1
-    },
-    {
-      "id": 6,
-      "title": "Beachfront Bungalow",
-      "description": "Relaxing beachfront bungalow with stunning ocean views",
-      "images": [
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
-      ],
-      "price": 750000,
-      "type": "Bungalow",
-      "location": "Hawaii, HI",
-      "user_id": 1
-    },
-    {
-      "id": 7,
-      "title": "Rustic Log Cabin",
-      "description": "Cozy log cCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsabin with wood-burning fireplace and mountain views",
-      "images": [
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
-      ],
-      "price": 300000,
-      "type": "Log Cabin",
-      "location": "Aspen, CO"
-    },
-    {
-      "id": 8,
-      "title": "Contemporary Townhouse",
-      "description": "Sleek and modern townhouse in a trendy urban neighborhood",
-      "images": [
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
-      ],
-      "price": 600000,
-      "type": "Townhouse",
-      "location": "San Francisco, CA"
-    },
-    {
-      "id": 9,
-      "title": "Country Farmhouse",
-      "description": "Charming farmhouse with wrap-around porch and scenic countryside views",
-      "images": [
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
-        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
-      ],
-      "price": 400000,
-      "type": "Farmhouse",
-      "location": "Nashville, TN"
-    }
-  ]
+  "posts": []
 }

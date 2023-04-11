@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectPosts,
-  selectStatus,
-  selectError,
-  fetchPosts,
-} from 'store/posts';
+import { isNil } from 'lodash-es';
+
+import { selectPosts, fetchPosts } from 'store/posts';
 import { AppDispatch } from 'store';
 import ListingItem from 'components/ListingItem';
 import { IListingProps } from '.';
@@ -23,7 +20,7 @@ const Listing = ({ userId }: IListingProps) => {
   return (
     <div className='Listing'>
       {posts.map((post) => (
-        <ListingItem post={post} key={post.id} editable />
+        <ListingItem post={post} key={post.id} editable={!isNil(userId)} />
       ))}
     </div>
   );

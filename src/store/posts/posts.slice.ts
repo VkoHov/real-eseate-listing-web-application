@@ -1,16 +1,18 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'config/axios';
 import { RootState } from 'store';
+import { Image } from 'components/PostModal';
 
 // Define the type for post data
 interface Post {
-  id: number;
+  id?: number | string;
   title: string;
   description: string;
-  images: string[];
+  images: Image[];
   price: number;
   type: string;
   location: string;
+  userId: number;
 }
 
 // Define the initial state for posts
@@ -31,7 +33,7 @@ const initialState: PostsState = {
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async ({ userId }: { userId?: number }) => {
-    const queryParams = userId ? `?user_id=${userId}` : '';
+    const queryParams = userId ? `?userId=${userId}` : '';
     try {
       const response = await axios.get('/posts' + queryParams); // Change the URL to your JSON server endpoint for posts
       return response.data;

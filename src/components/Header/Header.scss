@@ -9,4 +9,18 @@
       cursor: pointer;
     }
   }
+  &__content {
+    height: 100%;
+    &__accountBox {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      &__adminButton {
+        margin-right: 20px;
+      }
+      &__logOutButton {
+        margin-right: 20px;
+      }
+    }
+  }
 }

@@ -119,7 +119,8 @@ export const authSlice = createSlice({
   },
 });
 
-export const selectAuth = (state: RootState) => state.authReducer.userData;
+export const selectAuth = (state: RootState): UserData =>
+  state.authReducer.userData;
 export const { restoreUserDataFromLS } = authSlice.actions;
 
 export default authSlice.reducer;

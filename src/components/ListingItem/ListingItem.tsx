@@ -1,26 +1,21 @@
-import React, { useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Modal, Form, Input, message, Card } from 'antd';
-import {
-  selectPosts,
-  selectStatus,
-  selectError,
-  fetchPosts,
-  deletePost,
-  updatePost,
-} from 'store/posts';
+import { Button, Modal, message, Card } from 'antd';
+import { deletePost } from 'store/posts';
 import { AppDispatch } from 'store';
 import { EyeOutlined } from '@ant-design/icons';
 
-import { Link, useNavigate } from 'react-router-dom';
-import { selectAuth, UserRole } from 'store/auth';
+import PostModal from 'components/PostModal';
+
+import { selectAuth } from 'store/auth';
 import { IListingItemProps } from '.';
 
 import './ListingItem.scss';
 
 const ListingItem = ({ post, editable = false }: IListingItemProps) => {
-  const user = useSelector(selectAuth);
   const dispatch = useDispatch<AppDispatch>();
+  const [isEditPostModalVisible, setIsEditPostModalVisible] =
+    useState<boolean>(false);
 
   const handleDelete = (postId: number) => {
     Modal.confirm({
@@ -33,53 +28,9 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
       },
     });
   };
-  //@ts-ignore
-  const handleEdit = (post) => {
-    Modal.confirm({
-      title: 'Edit Post',
-      content: (
-        <Form
-          name='editPostForm'
-          initialValues={{
-            title: post.title,
-            description: post.description,
-            price: post.price,
-            type: post.type,
-            location: post.location,
-          }}
-        >
-          <Form.Item label='Title' name='title'>
-            <Input />
-          </Form.Item>
-          <Form.Item label='Description' name='description'>
-            <Input />
-          </Form.Item>
-          <Form.Item label='Price' name='price'>
-            <Input />
-          </Form.Item>
-          <Form.Item label='Type' name='type'>
-            <Input />
-          </Form.Item>
-          <Form.Item label='Location' name='location'>
-            <Input />
-          </Form.Item>
-        </Form>
-      ),
-      onOk: () => {
-        const updatedPost = {
-          id: post.id,
-          title: post.title,
-          description: post.description,
-          price: post.price,
-          type: post.type,
-          location: post.location,
-        };
-        //@ts-ignore
-        dispatch(updatePost(updatedPost)).then(() => {
-          message.success('Post updated successfully!');
-        });
-      },
-    });
+
+  const handleEditPostModalVisibility = () => {
+    setIsEditPostModalVisible(!isEditPostModalVisible);
   };
 
   return (
@@ -87,7 +38,7 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
       key={post.id}
       style={{ width: 300, margin: '16px' }}
       className='ListingItem'
-      cover={<img alt={post.title} src={post.images?.[0]} />}
+      cover={<img alt={post.title} src={post.images?.[0].base64} />}
     >
       <Button
         type='default'
@@ -105,7 +56,7 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
       <p>Location: {post.location}</p>
       {editable && (
         <>
-          <Button type='primary' onClick={() => handleEdit(post)}>
+          <Button type='primary' onClick={handleEditPostModalVisibility}>
             Edit
           </Button>
           <Button
@@ -116,6 +67,13 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
             Delete
           </Button>
         </>
+      )}
+      {isEditPostModalVisible && (
+        <PostModal
+          visible={isEditPostModalVisible}
+          post={post}
+          onCancel={handleEditPostModalVisibility}
+        />
       )}
     </Card>
   );
