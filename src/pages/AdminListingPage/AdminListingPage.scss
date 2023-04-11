@@ -1,4 +1,8 @@
 .AdminListingPage {
+  height: calc(100% - 64px);
+  &__listingWrapper {
+    height: calc(100% - 84px);
+  }
   &__createButtonWrapper {
     padding: 20px;
     display: flex;

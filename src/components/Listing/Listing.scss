@@ -2,6 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  height: 100%;
+  &__emptyBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
   .ant-card {
     .ant-card-cover {
       max-height: 300px;

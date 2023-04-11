@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Layout, Row, Col, Button, Avatar } from 'antd';
 import { ProfileOutlined, LoginOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import {
   logout,
@@ -20,7 +20,9 @@ const { Header } = Layout;
 const CustomHeader = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector(selectAuth);
+  const { pathname } = location;
 
   useEffect(() => {
     if (!localStorage.getItem('auth') && !user.name) {
@@ -37,12 +39,8 @@ const CustomHeader = () => {
     dispatch(logout());
   };
 
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
   const handleNavigateToAdminPage = () => {
-    navigate('/admin');
+    navigate(pathname === '/admin' ? '/' : '/admin');
   };
 
   const handleLogoClick = () => {
@@ -66,7 +64,7 @@ const CustomHeader = () => {
                   onClick={handleNavigateToAdminPage}
                   className='Header__content__accountBox__adminButton'
                 >
-                  Admin Page
+                  {pathname === '/admin' ? 'Listing Page' : 'Admin Page'}
                 </Button>
               )}
               <Button
@@ -85,9 +83,7 @@ const CustomHeader = () => {
               </Avatar>
             </>
           ) : (
-            <Button icon={<LoginOutlined />} onClick={handleLogin}>
-              Login
-            </Button>
+            <></>
           )}
         </Col>
       </Row>

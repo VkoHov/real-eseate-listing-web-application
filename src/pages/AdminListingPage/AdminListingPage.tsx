@@ -35,8 +35,9 @@ const AdminListingPage = () => {
           Create Post
         </Button>
       </div>
-
-      {!isNil(user.id) ? <Listing userId={user.id ?? 0} /> : null}
+      <div className='AdminListingPage__listingWrapper'>
+        {!isNil(user.id) ? <Listing userId={user.id ?? 0} /> : null}
+      </div>
       <CreatePostModal visible={isModalVisible} onCancel={handleModalVisible} />
     </div>
   );

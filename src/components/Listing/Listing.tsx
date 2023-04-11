@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { isNil } from 'lodash-es';
+import { isNil, isEmpty } from 'lodash-es';
+import { Empty } from 'antd';
 
 import { selectPosts, fetchPosts } from 'store/posts';
 import { AppDispatch } from 'store';
@@ -19,9 +20,15 @@ const Listing = ({ userId }: IListingProps) => {
 
   return (
     <div className='Listing'>
-      {posts.map((post) => (
-        <ListingItem post={post} key={post.id} editable={!isNil(userId)} />
-      ))}
+      {!isEmpty(posts) ? (
+        posts.map((post) => (
+          <ListingItem post={post} key={post.id} editable={!isNil(userId)} />
+        ))
+      ) : (
+        <div className='Listing__emptyBox'>
+          <Empty description='No posts yet' />
+        </div>
+      )}
     </div>
   );
 };
