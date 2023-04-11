@@ -16,10 +16,10 @@ const Login = () => {
   const [password, setPassword] = useState<string>('');
 
   useEffect(() => {
-    if (user.name) {
+    if (localStorage.getItem('auth')) {
       navigate('/');
     }
-  }, []);
+  }, [user]);
 
   const handleNavigateToSignUp = () => {
     navigate('/signup');

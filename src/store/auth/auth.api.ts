@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'config/axios';
+import { UserRole } from './auth.slice';
 
 type LoginData = {
   email: string;
@@ -8,12 +9,12 @@ type LoginData = {
 export type RegisterData = {
   email: string;
   password: string;
-  role: 'user' | 'agent';
+  role: UserRole;
   name: string;
 };
 
 export type UserData = {
-  role: 'user' | 'agent' | null;
+  role: UserRole | null;
   id: number | null;
   name: string | null;
   email: string | null;

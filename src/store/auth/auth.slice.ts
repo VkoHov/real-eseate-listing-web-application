@@ -2,8 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from 'store';
 import { api, RegisterData } from './auth.api';
 
+export const enum UserRole {
+  USER = 'user',
+  AGENT = 'agent',
+}
 interface UserData {
-  role: 'user' | 'agent' | null;
+  role: UserRole | null;
   id: number | null;
   name: string | null;
   email: string | null;
@@ -50,7 +54,14 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    restoreUserDataFromLS: (state, action) => {
+      state.userData = {
+        ...state.userData,
+        ...action.payload,
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(login.pending, (state) => {
       state.loading = true;
@@ -109,5 +120,6 @@ export const authSlice = createSlice({
 });
 
 export const selectAuth = (state: RootState) => state.authReducer.userData;
+export const { restoreUserDataFromLS } = authSlice.actions;
 
 export default authSlice.reducer;

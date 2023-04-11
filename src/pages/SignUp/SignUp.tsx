@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Row, Col, Typography, Select } from 'antd';
 import { AppDispatch } from 'store';
-import { signUp, selectAuth } from 'store/auth';
+import { signUp, selectAuth, UserRole } from 'store/auth';
 
 const { Title, Link } = Typography;
 const { Option } = Select;
@@ -16,13 +16,13 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-  const [role, setRole] = useState<'user' | 'agent'>('user');
+  const [role, setRole] = useState<UserRole>(UserRole.USER);
 
   useEffect(() => {
-    if (user.name) {
+    if (localStorage.getItem('auth')) {
       navigate('/');
     }
-  }, []);
+  }, [user]);
 
   const handleNavigateToLogin = () => {
     navigate('/login');
@@ -46,7 +46,7 @@ const SignUp = () => {
     setConfirmPassword(e.target.value);
   };
 
-  const handleRoleChange = (value: 'user' | 'agent') => {
+  const handleRoleChange = (value: UserRole) => {
     setRole(value);
   };
 

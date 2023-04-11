@@ -1,19 +1,35 @@
 import React from 'react';
 
-const Listing = React.lazy(
-  () => import(/* webpackChunkName: "listing" */ '../pages/Listing/Listing'),
-);
 const Login = React.lazy(
   () => import(/* webpackChunkName: "Login" */ '../pages/Login/Login'),
 );
+
 const SignUp = React.lazy(
   () => import(/* webpackChunkName: "SignUp" */ '../pages/SignUp/SignUp'),
 );
 
+const ListingPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "ListingPage" */ '../pages/ListingPage/ListingPage'
+    ),
+);
+
+const AdminListingPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "AdminListingPage" */ '../pages/AdminListingPage/AdminListingPage'
+    ),
+);
+
 const routes = {
-  LISTING: {
+  LISTINGPAGE: {
     path: '/',
-    component: Listing,
+    component: ListingPage,
+  },
+  ADMINLISTINGPAGE: {
+    path: '/admin',
+    component: AdminListingPage,
   },
   LOGIN: {
     path: '/login',

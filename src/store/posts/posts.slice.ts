@@ -28,14 +28,18 @@ const initialState: PostsState = {
 };
 
 // Fetch posts async thunk
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
-  try {
-    const response = await axios.get('/posts'); // Change the URL to your JSON server endpoint for posts
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to fetch posts');
-  }
-});
+export const fetchPosts = createAsyncThunk(
+  'posts/fetchPosts',
+  async ({ userId }: { userId?: number }) => {
+    const queryParams = userId ? `?user_id=${userId}` : '';
+    try {
+      const response = await axios.get('/posts' + queryParams); // Change the URL to your JSON server endpoint for posts
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch posts');
+    }
+  },
+);
 
 // Create post async thunk
 export const createPost = createAsyncThunk(
