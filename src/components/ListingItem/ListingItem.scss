@@ -1,6 +1,8 @@
 .ListingItem {
   max-height: 600px;
   height: 600px;
+  width: 300px;
+  margin: 16px;
   &__viewDetailButton {
     position: absolute;
     top: 10px;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Input, Select, Button, Slider } from 'antd';
 import { capitalize } from 'lodash-es';
 

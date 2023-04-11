@@ -75,7 +75,7 @@ const CustomHeader = () => {
                 Log Out
               </Button>
               <Avatar
-                style={{ verticalAlign: 'middle', background: '#903232' }}
+                className='Header__content__accountBox__avatar'
                 size='large'
                 gap={1}
               >

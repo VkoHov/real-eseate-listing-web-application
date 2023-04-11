@@ -38,12 +38,9 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
     setIsEditPostModalVisible(!isEditPostModalVisible);
   };
 
-  console.log(post.description);
-
   return (
     <Card
       key={post.id}
-      style={{ width: 300, margin: '16px' }}
       className='ListingItem'
       cover={
         <img

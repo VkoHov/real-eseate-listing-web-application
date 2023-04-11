@@ -171,7 +171,6 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             onChange={handlePriceChange}
             value={price}
             defaultValue={price}
-            style={{ width: '100%' }}
           />
         </Form.Item>
         <Form.Item label='Select' name='propertyType'>
