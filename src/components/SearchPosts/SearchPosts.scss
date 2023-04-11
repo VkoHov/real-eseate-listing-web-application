@@ -1,0 +1,20 @@
+.SearchPosts {
+  &__form {
+    border-bottom: 1px solid #0000003b;
+    border-top: 1px solid #0000003b;
+    padding: 20px 60px 0;
+    &__section {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      .ant-form-item {
+        width: 48%;
+      }
+    }
+    &__searchButton {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+  }
+}

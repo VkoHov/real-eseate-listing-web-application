@@ -32,8 +32,7 @@ const initialState: PostsState = {
 // Fetch posts async thunk
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
-  async ({ userId }: { userId?: number }) => {
-    const queryParams = userId ? `?userId=${userId}` : '';
+  async (queryParams: string) => {
     try {
       const response = await axios.get('/posts' + queryParams); // Change the URL to your JSON server endpoint for posts
       return response.data;

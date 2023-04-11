@@ -1,4 +1,4 @@
 export interface IListingItemProps {
-  post: any;
+  post: Post;
   editable?: boolean;
 }
