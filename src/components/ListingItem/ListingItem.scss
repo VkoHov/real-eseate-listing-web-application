@@ -1,0 +1,17 @@
+.ListingItem {
+  &__viewDetailButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  &__content {
+    .ant-card-meta-description {
+      height: 90px;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      line-clamp: 4;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+    }
+  }
+}

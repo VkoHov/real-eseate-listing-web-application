@@ -39,6 +39,13 @@
       "role": "agent",
       "name": "Ruben",
       "id": 6
+    },
+    {
+      "email": "vkohovhannisyan96@gmail.com",
+      "password": "$2a$10$EtSK9qdDFF2FxkdyKjJvxegJ8Sa/fZn3rZc1R4a/n7OscYZgQoDOK",
+      "role": "agent",
+      "name": "Vardges",
+      "id": 7
     }
   ],
   "posts": [
@@ -47,49 +54,34 @@
       "title": "Luxurious Mansion",
       "description": "Elegant mansion with stunning views of the ocean",
       "images": [
-        "https://example.com/mansion1.jpg",
-        "https://example.com/mansion2.jpg"
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
       ],
       "price": 2000000,
       "type": "Mansion",
       "location": "Miami, FL",
-      "user_id": 5
-    },
-    {
-      "id": 4,
-      "title": "Modern City Loft",
-      "description": "Contemporary loft with sleek design and urban vibes",
-      "images": [
-        "https://example.com/loft1.jpg",
-        "https://example.com/loft2.jpg"
-      ],
-      "price": 800000,
-      "type": "Loft",
-      "location": "New York, NY"
-    },
-    {
-      "title": "Vardges",
-      "id": 5
+      "user_id": 1
     },
     {
       "id": 6,
       "title": "Beachfront Bungalow",
       "description": "Relaxing beachfront bungalow with stunning ocean views",
       "images": [
-        "https://example.com/bungalow1.jpg",
-        "https://example.com/bungalow2.jpg"
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
       ],
       "price": 750000,
       "type": "Bungalow",
-      "location": "Hawaii, HI"
+      "location": "Hawaii, HI",
+      "user_id": 1
     },
     {
       "id": 7,
       "title": "Rustic Log Cabin",
-      "description": "Cozy log cabin with wood-burning fireplace and mountain views",
+      "description": "Cozy log cCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsCozy log cabin with wood-burning fireplace and mountain viewsabin with wood-burning fireplace and mountain views",
       "images": [
-        "https://example.com/cabin1.jpg",
-        "https://example.com/cabin2.jpg"
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
       ],
       "price": 300000,
       "type": "Log Cabin",
@@ -100,8 +92,8 @@
       "title": "Contemporary Townhouse",
       "description": "Sleek and modern townhouse in a trendy urban neighborhood",
       "images": [
-        "https://example.com/townhouse1.jpg",
-        "https://example.com/townhouse2.jpg"
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
       ],
       "price": 600000,
       "type": "Townhouse",
@@ -112,8 +104,8 @@
       "title": "Country Farmhouse",
       "description": "Charming farmhouse with wrap-around porch and scenic countryside views",
       "images": [
-        "https://example.com/farmhouse1.jpg",
-        "https://example.com/farmhouse2.jpg"
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg",
+        "https://www.bhg.com/thmb/3Vf9GXp3T-adDlU6tKpTbb-AEyE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg"
       ],
       "price": 400000,
       "type": "Farmhouse",
