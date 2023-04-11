@@ -38,11 +38,15 @@ cd property-listing-app
 
 3. Start the development server:
 
+```sh
 npm start
+```
 
 4. Start the JSON server on other terminal tab
 
+```sh
 npm run json-server
+```
 
 5. Open a web browser and go to http://localhost:3000 to view the application in your browser.
 
