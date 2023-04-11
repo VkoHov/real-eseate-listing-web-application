@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { message } from 'antd';
 import { RootState } from 'store';
 import { api, RegisterData } from './auth.api';
 
@@ -76,10 +77,12 @@ export const authSlice = createSlice({
         name: user.name,
         email: user.email,
       };
+      message.success('Login successful');
     });
     builder.addCase(login.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? 'Login failed';
+      message.error(action.error.message ?? 'Login failed');
     });
     builder.addCase(signUp.pending, (state) => {
       state.loading = true;
@@ -95,10 +98,13 @@ export const authSlice = createSlice({
         name: user.name,
         email: user.email,
       };
+      message.success('Sign up successful');
     });
     builder.addCase(signUp.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? 'Sign up failed';
+      console.log(action);
+      message.error(action.error.message ?? 'Sign up failed');
     });
     builder.addCase(logout.pending, (state) => {
       state.loading = true;
@@ -111,10 +117,12 @@ export const authSlice = createSlice({
         name: null,
         email: null,
       };
+      message.success('Logout successful');
     });
     builder.addCase(logout.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? 'Logout failed';
+      message.error(action.error.message ?? 'Logout failed');
     });
   },
 });

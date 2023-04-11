@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { message } from 'antd';
+
 import axios from 'config/axios';
 import { RootState } from 'store';
 import { Post } from 'components/PostModal';
-
-// Define the type for post data
 
 // Define the initial state for posts
 interface PostsState {
@@ -29,7 +29,7 @@ export const fetchPosts = createAsyncThunk(
       const response = await axios.get('/posts' + queryParams); // Change the URL to your JSON server endpoint for posts
       return response.data;
     } catch (error) {
-      throw new Error('Failed to fetch posts');
+      message.error('Failed to fetch posts');
     }
   },
 );
@@ -41,7 +41,7 @@ export const fetchPost = createAsyncThunk(
       const response = await axios.get('/posts/' + postId); // Change the URL to your JSON server endpoint for posts
       return response.data;
     } catch (error) {
-      throw new Error('Failed to fetch posts');
+      message.error('Failed to fetch post');
     }
   },
 );
@@ -54,7 +54,7 @@ export const createPost = createAsyncThunk(
       const response = await axios.post('/posts', post); // Change the URL to your JSON server endpoint for creating posts
       return response.data;
     } catch (error) {
-      throw new Error('Failed to create post');
+      message.error('Failed to create post');
     }
   },
 );
@@ -67,7 +67,7 @@ export const updatePost = createAsyncThunk(
       const response = await axios.patch(`/posts/${post.id}`, post); // Change the URL to your JSON server endpoint for updating posts
       return response.data;
     } catch (error) {
-      throw new Error('Failed to update post');
+      message.error('Failed to update post');
     }
   },
 );
@@ -80,7 +80,7 @@ export const deletePost = createAsyncThunk(
       await axios.delete(`/posts/${postId}`); // Change the URL to your JSON server endpoint for deleting posts
       return postId;
     } catch (error) {
-      throw new Error('Failed to delete post');
+      message.error('Failed to delete post');
     }
   },
 );
@@ -103,6 +103,7 @@ export const postsSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to fetch posts';
+        message.error(action.error.message ?? 'Failed to fetch posts');
       })
       .addCase(fetchPost.pending, (state) => {
         state.status = 'loading';
@@ -114,7 +115,8 @@ export const postsSlice = createSlice({
       })
       .addCase(fetchPost.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message ?? 'Failed to fetch posts';
+        state.error = action.error.message ?? 'Failed to fetch post';
+        message.error(action.error.message ?? 'Failed to fetch post');
       })
       .addCase(createPost.pending, (state) => {
         state.status = 'loading';
@@ -123,10 +125,12 @@ export const postsSlice = createSlice({
       .addCase(createPost.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.posts.push(action.payload);
+        message.success('Post created successfully');
       })
       .addCase(createPost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to create post';
+        message.error(action.error.message ?? 'Failed to create post');
       })
       .addCase(updatePost.pending, (state) => {
         state.status = 'loading';
@@ -144,10 +148,12 @@ export const postsSlice = createSlice({
         if (existingPostIndex !== -1) {
           state.posts[existingPostIndex] = updatedPost;
         }
+        message.success('Post updated successfully');
       })
       .addCase(updatePost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to update post';
+        message.error(action.error.message ?? 'Failed to update post');
       })
       .addCase(deletePost.pending, (state) => {
         state.status = 'loading';
@@ -157,10 +163,12 @@ export const postsSlice = createSlice({
         state.status = 'succeeded';
         const deletedPostId = action.payload;
         state.posts = state.posts.filter((post) => post.id !== deletedPostId);
+        message.success('Post deleted successfully');
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to delete post';
+        message.error(action.error.message ?? 'Failed to delete post');
       });
   },
 });

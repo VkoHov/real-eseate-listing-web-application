@@ -36,8 +36,10 @@ const Login = () => {
         .required('Password is required'),
     }),
     onSubmit: (values) => {
-      dispatch(login({ ...values })).then(() => {
-        navigate('/');
+      dispatch(login({ ...values })).then((res) => {
+        if (res.payload) {
+          navigate('/');
+        }
       });
     },
   });

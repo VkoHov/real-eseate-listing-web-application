@@ -27,9 +27,7 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
       title: 'Delete Post',
       content: 'Are you sure you want to delete this post?',
       onOk: () => {
-        dispatch(deletePost(postId)).then(() => {
-          message.success('Post deleted successfully!');
-        });
+        dispatch(deletePost(postId));
       },
     });
   };

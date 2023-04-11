@@ -46,10 +46,12 @@ const SignUp = () => {
         .oneOf([Yup.ref('password')], 'Passwords do not match')
         .required('Please confirm your password'),
     }),
-    onSubmit: (values) => {
+    onSubmit: (values, e) => {
       const { name, email, password, role } = values;
-      dispatch(signUp({ name, email, password, role })).then(() => {
-        navigate('/');
+      dispatch(signUp({ name, email, password, role })).then((res) => {
+        if (res.payload) {
+          navigate('/');
+        }
       });
     },
   });

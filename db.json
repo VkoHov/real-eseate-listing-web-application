@@ -13,6 +13,13 @@
       "role": "agent",
       "name": "Vardges",
       "id": 2
+    },
+    {
+      "email": "john@example.com",
+      "password": "$2a$10$nAQd4s2eQBPx2agmu5L7t.GUcfcdvVPoBztiJB7d3M4TzuzeVKI5.",
+      "role": "agent",
+      "name": "Vardges",
+      "id": 3
     }
   ],
   "posts": [
