@@ -15,6 +15,13 @@ const ListingPage = React.lazy(
     ),
 );
 
+const DetailPage = React.lazy(
+  () =>
+    import(
+      /* webpackChunkName: "DetailPage" */ '../pages/DetailPage/DetailPage'
+    ),
+);
+
 const AdminListingPage = React.lazy(
   () =>
     import(
@@ -30,6 +37,10 @@ const routes = {
   ADMINLISTINGPAGE: {
     path: '/admin',
     component: AdminListingPage,
+  },
+  DETAIL: {
+    path: '/detail/:postId',
+    component: DetailPage,
   },
   LOGIN: {
     path: '/login',

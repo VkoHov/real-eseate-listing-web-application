@@ -1,12 +1,13 @@
 .ListingItem {
-  max-height: 560px;
-  height: 560px;
+  max-height: 600px;
+  height: 600px;
   &__viewDetailButton {
     position: absolute;
     top: 10px;
     right: 10px;
   }
   &__content {
+    margin-bottom: 4px;
     .ant-card-meta-description {
       height: 90px;
       text-overflow: ellipsis;
@@ -14,6 +15,15 @@
       line-clamp: 4;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
+    }
+    &__actionButtons {
+      width: 100%;
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      &__deleteButton {
+        margin-left: 10px;
+      }
     }
   }
 }

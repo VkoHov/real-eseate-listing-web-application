@@ -50,6 +50,8 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             location,
             images: imageList,
             userId: user.id ?? 0,
+            userName: user.name ?? '',
+            userEmail: user.email ?? '',
             id: post.id,
           }),
         );
@@ -65,6 +67,8 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             location,
             images: imageList,
             userId: user.id ?? 0,
+            userName: user.name ?? '',
+            userEmail: user.email ?? '',
           }),
         );
       }

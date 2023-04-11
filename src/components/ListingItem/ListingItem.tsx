@@ -1,21 +1,26 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Button, Modal, message, Card } from 'antd';
-import { deletePost } from 'store/posts';
-import { AppDispatch } from 'store';
 import { EyeOutlined } from '@ant-design/icons';
 
+import { deletePost } from 'store/posts';
+import { AppDispatch } from 'store';
 import PostModal from 'components/PostModal';
 
-import { selectAuth } from 'store/auth';
 import { IListingItemProps } from '.';
 
 import './ListingItem.scss';
 
 const ListingItem = ({ post, editable = false }: IListingItemProps) => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const [isEditPostModalVisible, setIsEditPostModalVisible] =
     useState<boolean>(false);
+
+  const handleDetailPageNavigation = () => {
+    navigate(`/detail/${post.id}`);
+  };
 
   const handleDelete = (postId: number) => {
     Modal.confirm({
@@ -33,41 +38,52 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
     setIsEditPostModalVisible(!isEditPostModalVisible);
   };
 
+  console.log(post.description);
+
   return (
     <Card
       key={post.id}
       style={{ width: 300, margin: '16px' }}
       className='ListingItem'
-      cover={<img alt={post.title} src={post.images?.[0].base64} />}
+      cover={
+        <img
+          alt={post.title}
+          src={
+            post.images?.[0]?.base64 ??
+            'https://st4.depositphotos.com/14953852/24787/v/450/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg'
+          }
+        />
+      }
     >
       <Button
         type='default'
         className='ListingItem__viewDetailButton'
         shape='circle'
+        onClick={handleDetailPageNavigation}
         icon={<EyeOutlined />}
       />
       <Card.Meta
-        title={post.title}
-        description={post.description}
+        title={post.title ? post.title : 'No title'}
+        description={post.description ? post.description : 'No description'}
         className='ListingItem__content'
       />
       <p>Price: {post.price}</p>
       <p>Type: {post.type}</p>
-      <p>Location: {post.location}</p>
+      <p>Location: {post.location ? post.location : 'No location'}</p>
       <p>Listing Type: {post.listingType}</p>
       {editable && (
-        <>
+        <div className='ListingItem__content__actionButtons'>
           <Button type='primary' onClick={handleEditPostModalVisibility}>
             Edit
           </Button>
           <Button
-            type='primary'
+            type='default'
+            className='ListingItem__content__actionButtons__deleteButton'
             onClick={() => handleDelete(post.id)}
-            style={{ marginLeft: '8px' }}
           >
             Delete
           </Button>
-        </>
+        </div>
       )}
       {isEditPostModalVisible && (
         <PostModal

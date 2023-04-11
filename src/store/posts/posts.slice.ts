@@ -8,6 +8,7 @@ import { Post } from 'components/PostModal';
 // Define the initial state for posts
 interface PostsState {
   posts: Post[];
+  currentPost: Post | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -15,6 +16,7 @@ interface PostsState {
 // Define the initial state for posts
 const initialState: PostsState = {
   posts: [],
+  currentPost: null,
   status: 'idle',
   error: null,
 };
@@ -25,6 +27,18 @@ export const fetchPosts = createAsyncThunk(
   async (queryParams: string) => {
     try {
       const response = await axios.get('/posts' + queryParams); // Change the URL to your JSON server endpoint for posts
+      return response.data;
+    } catch (error) {
+      throw new Error('Failed to fetch posts');
+    }
+  },
+);
+
+export const fetchPost = createAsyncThunk(
+  'posts/fetchPost',
+  async (postId: string | number) => {
+    try {
+      const response = await axios.get('/posts/' + postId); // Change the URL to your JSON server endpoint for posts
       return response.data;
     } catch (error) {
       throw new Error('Failed to fetch posts');
@@ -61,7 +75,7 @@ export const updatePost = createAsyncThunk(
 // Delete post async thunk
 export const deletePost = createAsyncThunk(
   'posts/deletePost',
-  async (postId: number) => {
+  async (postId: number | string) => {
     try {
       await axios.delete(`/posts/${postId}`); // Change the URL to your JSON server endpoint for deleting posts
       return postId;
@@ -90,6 +104,18 @@ export const postsSlice = createSlice({
         state.status = 'failed';
         state.error = action.error.message ?? 'Failed to fetch posts';
       })
+      .addCase(fetchPost.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(fetchPost.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.currentPost = action.payload;
+      })
+      .addCase(fetchPost.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message ?? 'Failed to fetch posts';
+      })
       .addCase(createPost.pending, (state) => {
         state.status = 'loading';
         state.error = null;
@@ -112,6 +138,9 @@ export const postsSlice = createSlice({
         const existingPostIndex = state.posts.findIndex(
           (post) => post.id === updatedPost.id,
         );
+        if (state.currentPost?.id === updatedPost.id) {
+          state.currentPost = updatedPost;
+        }
         if (existingPostIndex !== -1) {
           state.posts[existingPostIndex] = updatedPost;
         }
@@ -141,5 +170,6 @@ export default postsSlice.reducer;
 
 // Define selector functions for accessing posts state
 export const selectPosts = (state: RootState) => state.postsSlice.posts;
+export const selectPost = (state: RootState) => state.postsSlice.currentPost;
 export const selectStatus = (state: RootState) => state.postsSlice.status;
 export const selectError = (state: RootState) => state.postsSlice.error;

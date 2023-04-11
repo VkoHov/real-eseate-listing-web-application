@@ -21,4 +21,6 @@ export interface Post {
   listingType: string;
   location: string;
   userId: number;
+  userName: string;
+  userEmail: string;
 }
