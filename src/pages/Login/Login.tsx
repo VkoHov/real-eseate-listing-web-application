@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Row, Col, Typography } from 'antd';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import { login, selectAuth } from 'store/auth';
 import { AppDispatch } from 'store';
@@ -10,12 +12,35 @@ import './Login.scss';
 
 const { Title, Link } = Typography;
 
+interface FormValues {
+  email: string;
+  password: string;
+}
+
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const user = useSelector(selectAuth);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+
+  const formik = useFormik<FormValues>({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required'),
+      password: Yup.string()
+        .min(6, 'Password must be at least 6 characters')
+        .required('Password is required'),
+    }),
+    onSubmit: (values) => {
+      dispatch(login({ ...values })).then(() => {
+        navigate('/');
+      });
+    },
+  });
 
   useEffect(() => {
     if (localStorage.getItem('auth')) {
@@ -27,20 +52,6 @@ const Login = () => {
     navigate('/signup');
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = () => {
-    dispatch(login({ email, password })).then(() => {
-      navigate('/');
-    });
-  };
-
   return (
     <div className='Login'>
       <Row justify='center' align='middle' style={{ minHeight: '100vh' }}>
@@ -48,29 +59,37 @@ const Login = () => {
           <Title level={2} className='Login__title'>
             Login
           </Title>
-          <Form name='loginForm' size='large' onFinish={handleSubmit}>
-            <Form.Item
-              label='Email'
-              name='email'
-              rules={[
-                { required: true, message: 'Please input your email!' },
-                { type: 'email', message: 'Please input a valid email!' },
-              ]}
-            >
-              <Input value={email} onChange={handleEmailChange} />
+          <Form name='loginForm' size='large' onFinish={formik.handleSubmit}>
+            <Form.Item label='Email' name='email' className='Login__filed'>
+              <Input
+                id='email'
+                name='email'
+                type='email'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              <div className='Login__errorText'>
+                {formik.touched.email && formik.errors.email
+                  ? formik.errors.email
+                  : ''}
+              </div>
             </Form.Item>
 
-            <Form.Item
-              label='Password'
-              name='password'
-              rules={[
-                { required: true, message: 'Please input your password!' },
-              ]}
-            >
+            <Form.Item label='Password' name='password'>
               <Input.Password
-                value={password}
-                onChange={handlePasswordChange}
+                id='password'
+                name='password'
+                type='password'
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
               />
+              <div className='Login__errorText'>
+                {formik.touched.password && formik.errors.password
+                  ? formik.errors.password
+                  : ''}
+              </div>
             </Form.Item>
 
             <Form.Item>

@@ -5,4 +5,11 @@
   &__loginRedirection {
     text-align: center;
   }
+  &__errorText {
+    color: red;
+    height: 30px;
+  }
+  &__filed {
+    margin-bottom: 0;
+  }
 }
