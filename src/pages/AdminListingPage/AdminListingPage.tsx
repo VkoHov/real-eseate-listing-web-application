@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { isNil } from 'lodash-es';
 import { Button, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
 
 import Listing from 'components/Listing';
 import CreatePostModal from 'components/PostModal';
