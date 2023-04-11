@@ -1,3 +1,5 @@
+import { ListingType, PropertyType } from 'constants/post';
+
 export interface IPostModalProps {
   visible: boolean;
   post?: Post;
@@ -10,11 +12,13 @@ export interface Image {
 }
 
 export interface Post {
+  id?: number | string;
   title: string;
   description: string;
+  images: Image[];
   price: number;
   type: string;
+  listingType: string;
   location: string;
-  images: Image[];
-  id: string;
+  userId: number;
 }

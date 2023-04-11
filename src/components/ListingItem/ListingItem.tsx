@@ -54,6 +54,7 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
       <p>Price: {post.price}</p>
       <p>Type: {post.type}</p>
       <p>Location: {post.location}</p>
+      <p>Listing Type: {post.listingType}</p>
       {editable && (
         <>
           <Button type='primary' onClick={handleEditPostModalVisibility}>

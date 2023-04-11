@@ -1,19 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'config/axios';
 import { RootState } from 'store';
-import { Image } from 'components/PostModal';
+import { Post } from 'components/PostModal';
 
 // Define the type for post data
-interface Post {
-  id?: number | string;
-  title: string;
-  description: string;
-  images: Image[];
-  price: number;
-  type: string;
-  location: string;
-  userId: number;
-}
 
 // Define the initial state for posts
 interface PostsState {

@@ -4,8 +4,8 @@ import { capitalize, noop } from 'lodash-es';
 import { Modal, Form, Input, InputNumber, Button, message, Select } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
-import { PropertyType } from 'constants/post';
-import { selectAuth, UserData } from 'store/auth';
+import { ListingType, PropertyType } from 'constants/post';
+import { selectAuth } from 'store/auth';
 import { createPost, updatePost } from 'store/posts';
 import { AppDispatch } from 'store';
 import { IPostModalProps, Image } from '.';
@@ -19,6 +19,9 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
   const user = useSelector(selectAuth);
   const [type, setType] = useState<string>(
     post?.type ?? PropertyType.APARTMENT,
+  );
+  const [listingType, setListingType] = useState<string>(
+    post?.listingType ?? ListingType.SALE,
   );
   const [title, setTitle] = useState<string>(post?.title ?? '');
   const [description, setDescription] = useState<string>(
@@ -43,6 +46,7 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             description,
             price,
             type,
+            listingType,
             location,
             images: imageList,
             userId: user.id ?? 0,
@@ -57,6 +61,7 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             description,
             price,
             type,
+            listingType,
             location,
             images: imageList,
             userId: user.id ?? 0,
@@ -93,6 +98,10 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
 
   const handleTypeChange = (value: string) => {
     setType(value);
+  };
+
+  const handleListingTypeChange = (value: string) => {
+    setListingType(value);
   };
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -176,6 +185,16 @@ const PostModal = ({ visible, post, onCancel = noop }: IPostModalProps) => {
             value={location}
             defaultValue={location}
           />
+        </Form.Item>
+        <Form.Item label='Listing Type' name='listingType'>
+          <Select
+            onChange={handleListingTypeChange}
+            value={listingType}
+            defaultValue={listingType}
+          >
+            <Option value='sale'>For Sale</Option>
+            <Option value='rent'>For Rent</Option>
+          </Select>
         </Form.Item>
         <Form.Item label='Images' name='images'>
           <div className='PostModal__form__imagesFiled'>

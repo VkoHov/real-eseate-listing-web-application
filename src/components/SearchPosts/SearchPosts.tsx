@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, Select, Button, Slider } from 'antd';
 import { capitalize } from 'lodash-es';
 
-import { PropertyType } from 'constants/post';
+import { ListingType, PropertyType } from 'constants/post';
 import { ISearchPostsProps, SearchParams } from '.';
 
 import './SearchPosts.scss';
@@ -19,6 +19,11 @@ const SearchPosts = ({ onSearch }: ISearchPostsProps) => {
 
   const onSliderChange = (value: [number, number]) => {
     setPriceRange(value);
+  };
+
+  const handleResetFields = () => {
+    form.resetFields();
+    setPriceRange([0, 1000000]);
   };
 
   return (
@@ -67,13 +72,34 @@ const SearchPosts = ({ onSearch }: ISearchPostsProps) => {
               }}
             />
           </Form.Item>
-
-          <Form.Item className='SearchPosts__form__searchButton'>
-            <Button type='primary' htmlType='submit' size='large'>
-              Search
-            </Button>
+          <Form.Item label='Listing Type' name='listingType'>
+            <Select placeholder='Listing Type'>
+              {Object.values(ListingType).map((value) => (
+                <Option value={value} key={value}>
+                  {capitalize(value)}
+                </Option>
+              ))}
+            </Select>
           </Form.Item>
         </div>
+        <Form.Item className='SearchPosts__form__buttonsWrapper'>
+          <Button
+            type='primary'
+            htmlType='submit'
+            size='large'
+            className='SearchPosts__form__buttonsWrapper__searchButton'
+          >
+            Search
+          </Button>
+          <Button
+            type='default'
+            htmlType='submit'
+            size='large'
+            onClick={handleResetFields}
+          >
+            Reset
+          </Button>
+        </Form.Item>
       </Form>
     </div>
   );

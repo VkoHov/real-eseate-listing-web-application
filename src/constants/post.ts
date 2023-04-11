@@ -23,3 +23,8 @@ export const PropertyType = {
   FARMHOUSE: 'Farmhouse',
   MANSION: 'Mansion',
 };
+
+export const ListingType = {
+  SALE: 'Sale',
+  RENT: 'Rent',
+};
