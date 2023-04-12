@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Card, Carousel, Button, Modal, message } from 'antd';
@@ -17,6 +17,7 @@ const DetailsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { postId } = useParams();
+  const carouselRef = useRef<any>(null);
   const [isEditPostModalVisible, setIsEditPostModalVisible] =
     useState<boolean>(false);
 
@@ -62,8 +63,8 @@ const DetailsPage = () => {
         <div className='DetailsPage__content__imagesSection'>
           {!isEmpty(post?.images) ? (
             <Carousel
-              autoplay
               className='DetailsPage__content__imagesSection__carousel'
+              ref={carouselRef}
             >
               {/* Render additional images using Carousel component */}
               {post?.images?.map((image: Image, index: number) => (
@@ -87,6 +88,9 @@ const DetailsPage = () => {
               <div
                 key={index}
                 className='DetailsPage__content__imagesSection__imagesList__imageBox'
+                onClick={() => {
+                  carouselRef.current?.goTo(index);
+                }}
               >
                 <img src={image.base64} alt='Property' />
               </div>
