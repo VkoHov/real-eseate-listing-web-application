@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { Button, Modal, message, Card } from 'antd';
+import { Button, Modal, Card } from 'antd';
 import { EyeOutlined } from '@ant-design/icons';
 
 import { deletePost } from 'store/posts';
@@ -91,4 +91,4 @@ const ListingItem = ({ post, editable = false }: IListingItemProps) => {
   );
 };
 
-export default ListingItem;
+export default memo(ListingItem);

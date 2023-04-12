@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Form, Input, Select, Button, Slider } from 'antd';
 import { capitalize } from 'lodash-es';
 
@@ -105,4 +105,4 @@ const SearchPosts = ({ onSearch }: ISearchPostsProps) => {
   );
 };
 
-export default SearchPosts;
+export default memo(SearchPosts);
